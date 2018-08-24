@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <title>Title</title>
+    <script src="../lib/zepto.min.js"></script>
+    <script src="../MSimple.js"></script>
+    <script src="../Source.js"></script>
+    <script src="../widget/View.js"></script>
+    <script src="../RootController.js"></script>
+    <link href="../MSimple.css" rel="stylesheet" />
+</head>
+<body>
+<div id="main-container">
+
+</div>
+<script>
+    var rc = new RootController();
+    rc.init($("#main-container"));
+    rc.addView('View/Index',true);
+</script>
+</body>
+</html>
