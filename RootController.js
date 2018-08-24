@@ -1,7 +1,7 @@
 /**
  * Created by reco on 2018/8/13.
  */
-MSimple.regist('RootController');
+MElegant.regist('RootController');
 
 RootController = function(){
     this._windowStack = [];

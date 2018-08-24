@@ -1,9 +1,9 @@
 /**
  * Created by reco on 2018/8/16.
  */
-MSimple.regist('View.Index');
+MElegant.regist('View.Index');
 View.Index   = function(){
-    MSimple.extend(this,Widget.View,arguments);
+    MElegant.extend(this,Widget.View,arguments);
 };
 
 View.Index.prototype = {

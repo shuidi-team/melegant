@@ -2,7 +2,7 @@
  * Created by reco on 2018/8/13.
  */
 
-var MSimple  = {
+var MElegant  = {
     regist:function(className,ClassObject) {
         ClassObject = ClassObject || function(){};
         var path = className.split(".");
