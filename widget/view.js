@@ -3,7 +3,14 @@
  */
 MElegant.regist("Widget.View");
 Widget.View = function(){
-    this.load = function(complete){
+    this.destroy = function(){
+    };
+    this.shown = function(){
+    };
+    this.showIn = function(container){
+        container.append($(this.viewClass.html));
+    };
+    this.find = function(){
 
     }
 };
