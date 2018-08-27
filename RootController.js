@@ -19,7 +19,7 @@ RootController =  {
     },
     /**
      * 添加一个view进场
-     * @param view
+     * @param viewClassString
      * @param animate 是否带动画
      */
     addView:function(viewClassString,animate) {
