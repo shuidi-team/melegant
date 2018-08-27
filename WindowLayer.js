@@ -10,6 +10,7 @@ WindowLayer = function(){
 };
 WindowLayer.prototype = {
     in:function(){
+        console.log(this.animate);
         if(this.animate) {
             this.dom.css({
                 'transform':'translate('+screen.availWidth+'px,0)',

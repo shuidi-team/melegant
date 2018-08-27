@@ -50,7 +50,7 @@ RootController =  {
      * @param animate 是否带动画
      */
     popView:function(animate) {
-
+        history.back();
     },
     /**
      *
