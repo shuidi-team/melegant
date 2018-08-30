@@ -6,14 +6,14 @@
  * Create on 18-8-28 下午7:44
  */
 MElegant.regist("Widget.TabBar");
-Widget.TabBar = {
+Widget.TabBar = function(){
     // 字体颜色
-    _color: "#000",
+    this._color = "#000";
     // 选中后字体颜色
-    _selectedColor: "#555",
+    this._selectedColor = "#555";
     // tabBat背景颜色
-    _backgroundColor: "#fff",
-    _tabList :[],
+    this._backgroundColor = "#fff";
+    this._tabList =[];
     // tabList: [
     //     {
     //         "viewPath": "sample/view/index",
@@ -27,27 +27,26 @@ Widget.TabBar = {
      * 设置view列表
      * @param tabBarList
      */
-    setViewList:function (tabBarList) {
+    this.setViewList = function (tabBarList) {
         var tabIndex = this._tabList.length;
-
-    },
+    };
 
     /**
      * 通过index显示视图
      */
-    showViewAtIndex:function () {
+    this.showViewAtIndex = function () {
 
-    },
+    };
 
     /**
      * 生成guid的方法
      */
-    guid:function () {
+    function guid () {
         return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
             var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
             return v.toString(16);
         });
-    },
+    }
 
     /**
      * 合并数据
@@ -55,7 +54,7 @@ Widget.TabBar = {
      * @param source
      * @returns {*}
      */
-    extends: function(destination, source) {
+    Object.extends =  function(destination, source) {
         for (var property in source) {
             destination[property] = source[property];
             if(typeof source[property]=="object"){
@@ -66,16 +65,17 @@ Widget.TabBar = {
         }
         console.log(destination);
         return destination;
-    },
+    };
 
     /**
      * 处理数据 块
-     * @param {} json  后台json数据
-     * @param {} trName 前台模板tr cacheHtmls
-     * @param {} isClear 是否替换多余符号
-     * @returns {} object
+     * @param json          后台json数据
+     * @param cacheHtmls    trName 前台模板tr
+     * @param isClear       是否替换多余符号
+     * @param isSplite
+     * @returns {string}
      */
-    stringFormat:function (json, cacheHtmls,isClear,isSplite) {
+    function stringFormat (json, cacheHtmls,isClear,isSplite) {
         isSplite||false;
         isClear||true;
         var tbodyHtml = "";
@@ -90,7 +90,7 @@ Widget.TabBar = {
             isSplite==true&&(tbodyHtml+=i>= json.length-1?"":",");
         }
         return tbodyHtml;
-    },
+    }
 
     /**
      * tab item 的装饰HTML
@@ -98,7 +98,7 @@ Widget.TabBar = {
      * @param {Object} id
      * @returns {string}
      */
-    itemHtml:function(){
+    function itemHtml(json, id){
         return '<div style="width:50px;height: 50px;float: left;margin-left: {margin};margin-right: {margin};">'+
             '<a href="#" onclick="itemClick(\'{guid}\',\'{url}\')" style="text-decoration: none;">'+
             '<div style="width: 30px;height: 30px;padding-left:10px;padding-right:10px;">'+
@@ -106,29 +106,29 @@ Widget.TabBar = {
             '<div style="text-align:center"><div style="color: #848484;font-size: 8px;padding-top: 4px;">{text}</div></div>'+
             '</a>'+
             '</div>';
-    },
+    }
 
-    tabStyle:function () {
+    function tabStyle () {
         return {
             top_div:""
         };
-    },
+    }
 
     /**
      * 具体创建tab的方法
      * @param json
      * @param id
      */
-    createTab:function (json, id) {
+    function createTab (json, id) {
         var _json=[{text:"未知",url:"",iconPath:"",clickCallBack:null}];
         json=Object.extends(_json,json);
         var divs = document.getElementById(id);
-        var styles=tabStyle();
+        var styles= tabStyle();
         divs.setAttribute("style",styles["top_div"]+";"+divs.getAttribute("style"));
 
-        var cache=itemHtml();
-        var itemJson=json;
-        var val=stringFormat(itemJson,cache,false);
+        var cache = itemHtml(json,id);
+        var itemJson = json;
+        var val = stringFormat(itemJson,cache,false);
         //计算margin的左右宽度
         var widths=parseInt(((screen.availWidth||screen.width)-(itemJson.length * 50))/(itemJson.length*2));
         val=val.replace(/[{]margin[}]/g,widths+"px");
