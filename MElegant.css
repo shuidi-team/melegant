@@ -15,3 +15,23 @@ body {
 .window {
     position: absolute;
 }
+
+
+/*布局*/
+.box-horizontal{
+    display:-moz-box; /* Firefox */
+    display:-webkit-box; /* Safari and Chrome */
+    -moz-box-orient:horizontal;
+    -webkit-box-orient:horizontal;
+}
+.box-vertical{
+    display:-moz-box; /* Firefox */
+    display:-webkit-box; /* Safari and Chrome */
+    -moz-box-orient:vertical;
+    -webkit-box-orient:vertical;
+}
+.flex1{
+    -moz-box-flex:1.0; /* Firefox */
+    -webkit-box-flex:1.0; /* Safari and Chrome */
+    box-flex:1.0;
+}
