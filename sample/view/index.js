@@ -6,28 +6,25 @@ View.Index   = function(){
     MElegant.extend(this,Widget.View,arguments);
 
     MElegant.extend(this,Widget.TabBar,arguments);
-    var tab=[
+    // tabBar的json格式配置
+    var tabBarConfig=[
         {
             text:"首页",
-            url:"http://debug.cool",
             iconPath:'http://debug.cool/images/avatar.jpeg',
+            selectIconPath:'http://debug.cool/images/avatar.jpeg',
+            url:"View.Index",
             clickCallBack:function(obj){
                 alert(obj.url);
             }
         },
         {
-            text:"个人",
+            text:"测试",
             iconPath:'http://debug.cool/images/avatar.jpeg',
-            url:"http://debug.cool"
-        },
-        {
-            text:"设置",
-            iconPath:'http://debug.cool/images/avatar.jpeg',
-            url:"http://debug.cool"
+            selectIconPath:'http://debug.cool/images/avatar.jpeg',
+            url:"View.Test"
         }
     ];
-    this.createTab(tab,"bottom");
-
+    this.setViewList(tabBarConfig,"main-tabBar");
 };
 
 View.Index.prototype = {
