@@ -1,10 +1,12 @@
 /**
- * Created by reco on 2018/8/16.
+ * test.js
+ * @Des:    ...
+ * @Thinking：   ...
+ * @Author: kuan
+ * Create on 18-8-31 下午6:17
  */
-MElegant.regist('View.Index');
-View.Index   = function(){
-    MElegant.extend(this,Widget.View,arguments);
-
+MElegant.regist('View.Test');
+View.Test = function(){
     MElegant.extend(this,Widget.TabBar,arguments);
     var tab=[
         {
@@ -30,7 +32,6 @@ View.Index   = function(){
 
 };
 
-View.Index.prototype = {
+View.Test.prototype = {
 
 };
-
