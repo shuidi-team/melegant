@@ -15,34 +15,50 @@ Widget.TabBar = function(){
      */
     this.setViewList = function (tabBarJson,id) {
         var _tabBarJson = [{text:"未知", url:"", iconPath:"", selectedIconPath:"", clickCallBack:null}];
-        // 合并tabBar的配置数据
+        // 合并tabBar的配置数据，并加载tabBar绑定的页面
         tabBarJson = Object.extends(_tabBarJson,tabBarJson);
-        // 通过id获取div
+        // 通过绑定的id获取div位置
         var divs = document.getElementById(id);
-        // 获取css等样式
+        // 自定义的css通用样式
         var styles = _tabStyle();
-        //
+        // 整合tabBar的样式
         divs.setAttribute("style",styles["top_div"]+";"+divs.getAttribute("style"));
-
+        // 获取缓存的样式
         var cache = _itemHtml(tabBarJson,id);
+        // tabBar的数据
         var itemJson = tabBarJson;
-        var val = _stringFormat(itemJson,cache,false);
+        // 构造格式化的tabBar
+        var val = _stringFormat(itemJson,cache,false,false);
         //计算margin的左右宽度
         var widths=parseInt(((screen.availWidth||screen.width)-(itemJson.length * 50))/(itemJson.length*2));
+        // 替换像素
         val=val.replace(/[{]margin[}]/g,widths+"px");
+        // 最终显示的tabBar
         divs.innerHTML=val;
 
+        /**
+         * 点击加载
+         */
+        itemClickShowView = function (guid,url) {
+            itemJson.filter(function(obj){
+                if(obj["guid"]==guid){
+                    if(typeof obj["clickCallBack"]=="function"){
+                        obj["clickCallBack"](obj);
+                    }else{
+                        RootController.addView(url);
+                        // Source.loadView(url);
+                    }
+                }
+            });
+            // RootController.addView(url);
+
+        };
+
     };
 
-    /**
-     * 通过index显示视图
-     */
-    this.showViewAtIndex = function (url) {
-
-    };
 
     /**
-     * 合并数据
+     * 合并tabBar的配置数据
      * @param destination
      * @param source
      * @returns {*}
@@ -55,10 +71,10 @@ Widget.TabBar = function(){
             }else{
                 destination["guid"]= guid();
             }
-            Source.loadView(destination.url);
+            // 应该在此处通过 destination.url 来加载View
+            // Source.loadView(destination.url);
         }
         // Source.loadView()
-        console.log(destination);
         return destination;
     };
 
@@ -77,13 +93,13 @@ Widget.TabBar = function(){
      * 处理数据 块
      * @param json          后台json数据
      * @param cacheHtmls    trName 前台模板tr
-     * @param isClear       是否替换多余符号
-     * @param isSplite
+     * @param isClear       清空{margin},方便调试，默认false就正常输出样式
+     * @param isSplite      替换多余符号“,”，方便调试，默认false就正常输出样式
      * @returns {string}
      */
-    function _stringFormat  (json, cacheHtmls,isClear,isSplite) {
-        isSplite||false;
-        isClear||true;
+    function _stringFormat (json, cacheHtmls,isClear,isSplite) {
+        // isSplite||false;
+        // isClear||true;
         var tbodyHtml = "";
         for (var i = 0; i < json.length; i++) {
             var innerHtmls = cacheHtmls;
@@ -106,8 +122,7 @@ Widget.TabBar = function(){
      */
     function _itemHtml (json, id){
         return '<div style="width:50px;height: 50px;float: left;margin-left: {margin};margin-right: {margin};">'+
-            // '<a href="#" onclick=itemClick(\'{url}\')" style="text-decoration: none;">'+
-            '<a href="#" onclick=this.showViewAtIndex(\'{url}\') style="text-decoration: none;">'+
+            '<a href="#" onclick=itemClickShowView(\'{guid}\',\'{url}\') style="text-decoration: none;">'+
             '<div style="width: 30px;height: 30px;padding-left:10px;padding-right:10px;">'+
             '<img src="{iconPath}" style="width:100%;height:100%"></div>'+
             '<div style="text-align:center"><div style="color: #848484;font-size: 8px;padding-top: 4px;">{text}</div></div>'+
