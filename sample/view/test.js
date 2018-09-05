@@ -1,10 +1,13 @@
 /**
- * Created by reco on 2018/8/16.
+ * test.js
+ * @Des:    ...
+ * @Thinking：   ...
+ * @Author: kuan
+ * Create on 18-8-31 下午9:42
  */
-MElegant.regist('View.Index');
-View.Index   = function(){
+MElegant.regist('View.Test');
+View.Test   = function(){
     MElegant.extend(this,Widget.View,arguments);
-
     MElegant.extend(this,Widget.TabBar,arguments);
     // tabBar的json格式配置
     var tabBarConfig=[
@@ -27,7 +30,6 @@ View.Index   = function(){
     this.setViewList(tabBarConfig,"main-tabBar");
 };
 
-View.Index.prototype = {
+View.Test.prototype = {
 
 };
-
